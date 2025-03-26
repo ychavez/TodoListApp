@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35728.132 d17.12
+VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoListApp.Mobile", "TodoListApp.Mobile\TodoListApp.Mobile.csproj", "{997F516C-8910-47EF-9BFF-6C30B65F8F56}"
 EndProject
@@ -19,6 +19,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{997F516C-8910-47EF-9BFF-6C30B65F8F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{997F516C-8910-47EF-9BFF-6C30B65F8F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{997F516C-8910-47EF-9BFF-6C30B65F8F56}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{997F516C-8910-47EF-9BFF-6C30B65F8F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{997F516C-8910-47EF-9BFF-6C30B65F8F56}.Release|Any CPU.Build.0 = Release|Any CPU
 		{912B742A-1293-4D7F-9B37-01E44161EE3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

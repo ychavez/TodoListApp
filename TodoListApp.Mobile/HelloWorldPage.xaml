@@ -5,8 +5,12 @@
              Title="HelloWorldPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="{Binding Mensaje.Mensaje}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button Text="Cambiar Saludo"
+                Command="{Binding CambiarMensajeCommand}"/>
+
     </VerticalStackLayout>
 </ContentPage>

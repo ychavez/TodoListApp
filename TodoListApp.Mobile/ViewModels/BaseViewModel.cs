@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace TodoListApp.Mobile.ViewModels
 {
-    internal abstract class BaseViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
+    public abstract class BaseViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
 
         public event PropertyChangedEventHandler? PropertyChanged;
