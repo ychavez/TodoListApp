@@ -7,6 +7,7 @@ using TodoListApp.Infrastructure.DataContext;
 using TodoListApp.Infrastructure.Repositories;
 using TodoListApp.Mobile.Services;
 using TodoListApp.Mobile.ViewModels;
+using TodoListApp.Mobile.Views;
 
 namespace TodoListApp.Mobile
 {
@@ -22,12 +23,14 @@ namespace TodoListApp.Mobile
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-           
+
             builder.Services.AddScoped<INavigationService, NavigationService>();
-            builder.Services.AddTransient<HelloWorldPage>();
-            builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<HelloWorldViewModel>();
-            
+            builder.Services.AddTransient<CategoriesViewModel>();
+            builder.Services.AddTransient<CategoriesView>();
+
+            builder.Services.AddTransient<EditCategoryViewModel>();
+            builder.Services.AddTransient<EditCategoryPage>();
+
             builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(HelloWorldMessageQuery).Assembly));
 
@@ -36,7 +39,7 @@ namespace TodoListApp.Mobile
 
             var databasePath = Path.Combine(FileSystem.AppDataDirectory, "todoList.db");
 
-            builder.Services.AddDbContext<TodoListDbContext>(options => 
+            builder.Services.AddDbContext<TodoListDbContext>(options =>
             options.UseSqlite($"Filename={databasePath}"));
 
 
@@ -44,7 +47,15 @@ namespace TodoListApp.Mobile
             builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbcontext = scope.ServiceProvider.GetRequiredService<TodoListDbContext>();
+                dbcontext.Database.Migrate();
+            }
+
+            return app;
         }
     }
 }

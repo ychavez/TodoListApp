@@ -9,7 +9,7 @@ namespace TodoListApp.Infrastructure
         public TodoListDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<TodoListDbContext>();
-            optionsBuilder.UseSqlite("Data source=todoLidt.db");
+            optionsBuilder.UseSqlite("Data source=todoList.db");
 
             return new TodoListDbContext(optionsBuilder.Options);
         }

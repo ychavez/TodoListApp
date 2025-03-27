@@ -16,9 +16,4 @@
     <ProjectReference Include="..\TodoListApp.Infrastructure\TodoListApp.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Behaviors\" />
-    <Folder Include="Validations\" />
-  </ItemGroup>
-
 </Project>

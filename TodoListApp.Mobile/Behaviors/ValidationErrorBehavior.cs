@@ -1,4 +1,5 @@
-﻿using TodoListApp.Mobile.ViewModels;
+﻿using System.ComponentModel;
+using TodoListApp.Mobile.ViewModels;
 
 namespace TodoListApp.Mobile.Behaviors
 {
@@ -6,12 +7,14 @@ namespace TodoListApp.Mobile.Behaviors
     {
         private BaseViewModel? _viewModel;
         private string? _propertyName;
+        private bool _isAttached;
+        private Entry _entry;
 
         protected override void OnAttachedTo(Entry entry)
         {
             entry.BindingContextChanged += OnBindingContextChanged;
             entry.TextChanged += OnEntryTexChanged;
-            
+            _entry = entry;
             base.OnAttachedTo(entry);
         }
 
@@ -22,6 +25,19 @@ namespace TodoListApp.Mobile.Behaviors
             base.OnDetachingFrom(entry);
         }
 
+        private void AttachHandlers() 
+        {
+            if (_isAttached || _viewModel is null) return;
+
+            _viewModel.ErrorsChanged += OnErrorsChanged;
+
+        }
+
+        private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e) 
+        {
+        
+        }
+
         private void OnBindingContextChanged(object sender, EventArgs e)
         {
             if (sender is Entry entry)
@@ -29,9 +45,12 @@ namespace TodoListApp.Mobile.Behaviors
                 _viewModel = entry.BindingContext as BaseViewModel;
 
                 var binding = entry.BindingContext as Binding;
+               
                 _propertyName = binding?.Path;
             }
         }
+
+
 
 
         private void OnEntryTexChanged(object sender, TextChangedEventArgs e)
