@@ -33,7 +33,11 @@ namespace TodoListApp.Mobile
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
-            builder.Services.AddDbContext<TodoListDbContext>(options => options.UseSqlite($"Filename=todo.db"));
+
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "todoList.db");
+
+            builder.Services.AddDbContext<TodoListDbContext>(options => 
+            options.UseSqlite($"Filename={databasePath}"));
 
 
 #if DEBUG
