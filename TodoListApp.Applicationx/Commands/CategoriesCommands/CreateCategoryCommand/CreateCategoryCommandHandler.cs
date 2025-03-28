@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using TodoListApp.Domain.Entities;
 using TodoListApp.Infrastructure.Abstractions;
 
@@ -7,21 +8,18 @@ namespace TodoListApp.Applicationx.Commands.CategoriesCommands.CreateCategoryCom
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, bool>
     {
         private readonly ICategoryRepository categoryRepository;
+        private readonly IMapper mapper;
 
-        public CreateCategoryCommandHandler(ICategoryRepository categoryRepository)
+        public CreateCategoryCommandHandler(ICategoryRepository categoryRepository,IMapper mapper)
         {
             this.categoryRepository = categoryRepository;
+            this.mapper = mapper;
         }
         public async Task<bool> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
            //TODO: validar no duplicado
 
-            var category = new Category
-            {
-                Color = request.CategoryModel.Color,
-                Name = request.CategoryModel.Name,
-                IsDeleted = false
-            };
+            var category = mapper.Map<Category>(request.CategoryModel);
 
             await categoryRepository.CreateCategory(category);
             

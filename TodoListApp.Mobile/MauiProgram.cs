@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TodoListApp.Applicationx.Extensions;
 using TodoListApp.Applicationx.Queries.HelloWorldMessage;
 using TodoListApp.Applicationx.Services.Abstractions;
 using TodoListApp.Infrastructure.Abstractions;
@@ -35,6 +36,8 @@ namespace TodoListApp.Mobile
             cfg.RegisterServicesFromAssembly(typeof(HelloWorldMessageQuery).Assembly));
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            builder.Services.AddApplicationServices();
 
 
             var databasePath = Path.Combine(FileSystem.AppDataDirectory, "todoList.db");

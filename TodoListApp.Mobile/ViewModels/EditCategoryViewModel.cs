@@ -17,7 +17,7 @@ namespace TodoListApp.Mobile.ViewModels
             CancelCommand = new Command(async () => await Cancel());
         }
 
-        private Category _currentCategory;
+        private Category _currentCategory = new();
         private readonly IMediator mediator;
         private readonly INavigationService navigationService;
 

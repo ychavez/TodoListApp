@@ -3,16 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoListApp.Mobile.Views.EditCategoryPage"
              xmlns:behaviors="clr-namespace:TodoListApp.Mobile.Behaviors"
+             xmlns:controls="clr-namespace:TodoListApp.Mobile.Components"
              Title="EditCategoryPage">
     <VerticalStackLayout>
         <Entry Placeholder="Nombre de la categoria" >
             <Entry.Behaviors>
-                <behaviors:ValidationErrorBehavior/>
+                <behaviors:ValidationErrorBehavior 
+                    NombreDePropiedad="Hola"/>
             </Entry.Behaviors>
             <Entry.Text>
                 <Binding Path="CurrentCategory.Name" Mode="TwoWay"/>
             </Entry.Text>
         </Entry>
+
+        <controls:ValidatedEntry Text="{Binding CurrentCategory.Name , Mode=TwoWay}" 
+                                 PlaceHolder="Nombre"/>
 
         <Entry Placeholder="Seleccione el color" Keyboard="Numeric" >
             <Entry.Text>

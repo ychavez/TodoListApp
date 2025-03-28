@@ -10,6 +10,19 @@ namespace TodoListApp.Mobile.Behaviors
         private bool _isAttached;
         private Entry _entry;
 
+        public static readonly BindableProperty PropertyNameProperty =
+            BindableProperty.Create("NombreDePropiedad", typeof(string),
+                typeof(ValidationErrorBehavior), string.Empty);
+
+
+        public string NombreDePropiedad
+        {
+            get => (string)GetValue(PropertyNameProperty);
+            set => SetValue(PropertyNameProperty, value);
+        }
+
+
+
         protected override void OnAttachedTo(Entry entry)
         {
             entry.BindingContextChanged += OnBindingContextChanged;
