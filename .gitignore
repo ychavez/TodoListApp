@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/TodoListApp.Mobile/google-services.json
+/TodoListApp.Mobile/GoogleService-Info.plist
