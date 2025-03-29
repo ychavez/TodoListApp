@@ -8,7 +8,7 @@
                Placeholder="{Binding PlaceHolder}"
                Text="{Binding Text}"/>
 
-        <Label x:Name="ErrorLabel"
+        <Label x:Name="ErrorLabelInternal"
                TextColor="Red"
                IsVisible="False"/>
 

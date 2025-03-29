@@ -20,6 +20,14 @@ namespace TodoListApp.Mobile.ViewModels
 
         }
 
+        object _model;
+
+        public object Model
+        {
+            get => _model;
+            set => SetProperty(ref _model, value);
+        }
+
         protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
@@ -54,15 +62,31 @@ namespace TodoListApp.Mobile.ViewModels
 
         }
 
-        protected void OnErrorsChanged(string propertyName)
+        protected void OnErrorsChanged(FluentValidation.ValidationException? exception)
         {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            if (exception is null)
+            {
+                Errors.Clear();
+                ErrorsChanged?.Invoke(this, new(string.Empty));
+                return;
+            }
+
+            var errorsResult = exception.Errors
+                .Where(e => e != null)
+                .Select(x => new { x.PropertyName, x.ErrorMessage })
+                .ToList();
+
+            foreach (var error in errorsResult)
+            {
+                Errors[error.PropertyName] = [error.ErrorMessage];
+                ErrorsChanged?.Invoke(this, new(error.PropertyName));
+            }
         }
 
         protected void ClearAllErrors()
         {
             Errors.Clear();
-            OnErrorsChanged(string.Empty);
+            OnErrorsChanged(null);
 
         }
         #endregion

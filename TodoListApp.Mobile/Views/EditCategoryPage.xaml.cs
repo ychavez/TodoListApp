@@ -9,4 +9,12 @@ public partial class EditCategoryPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        nameEntry.InitializeEntry();
+        colorEntry.InitializeEntry();
+
+    }
 }

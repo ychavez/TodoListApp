@@ -6,25 +6,18 @@
              xmlns:controls="clr-namespace:TodoListApp.Mobile.Components"
              Title="EditCategoryPage">
     <VerticalStackLayout>
-        <Entry Placeholder="Nombre de la categoria" >
-            <Entry.Behaviors>
-                <behaviors:ValidationErrorBehavior 
-                    NombreDePropiedad="Hola"/>
-            </Entry.Behaviors>
-            <Entry.Text>
-                <Binding Path="CurrentCategory.Name" Mode="TwoWay"/>
-            </Entry.Text>
-        </Entry>
 
-        <controls:ValidatedEntry Text="{Binding CurrentCategory.Name , Mode=TwoWay}" 
-                                 PlaceHolder="Nombre"/>
 
-        <Entry Placeholder="Seleccione el color" Keyboard="Numeric" >
-            <Entry.Text>
-                <Binding Path="CurrentCategory.Color" Mode="TwoWay"/>
-            </Entry.Text>
-        </Entry>
-        
+        <controls:ValidatedEntry x:Name="nameEntry" Text="{Binding Model.Name , Mode=TwoWay}" 
+                                 PropertyName="Name"/>
+
+
+        <controls:ValidatedEntry x:Name="colorEntry" Text="{Binding Model.Color , Mode=TwoWay}" 
+                          PropertyName="Color"/>
+
+        <controls:ValidatedEntry  PropertyName="Apodo"/>
+
+
         <Button Command="{Binding SaveCommand}" Text="Guardar"/>
 
     </VerticalStackLayout>

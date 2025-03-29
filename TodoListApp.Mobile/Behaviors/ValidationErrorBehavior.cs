@@ -63,9 +63,6 @@ namespace TodoListApp.Mobile.Behaviors
             }
         }
 
-
-
-
         private void OnEntryTexChanged(object sender, TextChangedEventArgs e)
         {
             if (sender is Entry entry && _viewModel is not null && !string.IsNullOrEmpty(_propertyName))

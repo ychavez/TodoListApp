@@ -15,17 +15,14 @@ namespace TodoListApp.Mobile.ViewModels
             this.navigationService = navigationService;
             SaveCommand = new Command(async () => await Save());
             CancelCommand = new Command(async () => await Cancel());
+            Model = new CategoryModel();
         }
 
-        private Category _currentCategory = new();
+      
         private readonly IMediator mediator;
         private readonly INavigationService navigationService;
 
-        public Category CurrentCategory
-        {
-            get => _currentCategory;
-            set => SetProperty(ref _currentCategory, value);
-        }
+       
 
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -41,25 +38,19 @@ namespace TodoListApp.Mobile.ViewModels
             try
             {
                 IsBusy = true;
-                if (string.IsNullOrEmpty(CurrentCategory.Name))
-                {
-                    Errors[nameof(CurrentCategory.Name)] = new List<string> { "El nombre es requerido" };
-                    OnErrorsChanged(nameof(CurrentCategory.Name));
-                    return;
-                }
+                ClearAllErrors();
+
 
                 await mediator.Send(new CreateCategoryCommand
                 {
-                    CategoryModel =
-                    new CategoryModel
-                    {
-                        Name = CurrentCategory.Name,
-                        Color = CurrentCategory.Color,
-
-                    }
+                    CategoryModel = (CategoryModel)Model
                 });
 
                 await navigationService.GoBackAsync();
+            }
+            catch (FluentValidation.ValidationException v) 
+            {
+                OnErrorsChanged(v);
             }
             finally
             {
